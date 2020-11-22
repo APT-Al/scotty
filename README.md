@@ -1,2 +1,2 @@
 # scotty
-Our Dashboard; beam us up scotty
+Our C&C and Dashboard; beam us up scotty
