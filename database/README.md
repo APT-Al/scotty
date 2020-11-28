@@ -6,3 +6,7 @@ bir veritabanı ve görselleştiricisi (phpmyadmin) ayaklandırmak için
 
 komutunun docker-compose.yml dosyasının bulunduğu dizinde 
 kullanılması gerekmektedir.
+
+Docker compose dosyasında da belirtildii gibi phpmyadmin erişimi sunucu adresi localhost ise:
+
+<pre>localhost:8081</pre> şeklinde gerçekleşmektedir.
