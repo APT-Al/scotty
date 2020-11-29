@@ -10,3 +10,5 @@ kullanılması gerekmektedir.
 Docker compose dosyasında da belirtildii gibi phpmyadmin erişimi sunucu adresi localhost ise:
 
 <pre>localhost:8081</pre> şeklinde gerçekleşmektedir.
+
+Not: phpmyadmin servisi 8081 portunu kullanıyor şu anda, go.api ise 8080
