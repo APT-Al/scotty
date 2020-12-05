@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="19e729b1-f416-4508-8013-2cc579e0f5b1" name="Default Changelist" comment="index page created">
-      <change afterPath="$PROJECT_DIR$/image/logo1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="19e729b1-f416-4508-8013-2cc579e0f5b1" name="Default Changelist" comment="index page created" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +47,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607168159065</updated>
-      <workItem from="1607168161473" duration="4090000" />
+      <workItem from="1607168161473" duration="4419000" />
     </task>
     <task id="LOCAL-00001" summary="index page created">
       <created>1607168325983</created>
