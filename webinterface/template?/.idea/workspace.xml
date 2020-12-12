@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="893a9c56-bcb3-490c-93d8-47d442a1c20c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/.babelrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/.eslintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/.github/workflows/main.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/CHANGELOG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/CONTRIBUTING.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/ISSUE_TEMPLATE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/intelij.webpack.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/apple-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/anime3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/anime6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/apple-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/bg5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/default-avatar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/emilyz.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/apple-touch-icon-120x120.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/apple-touch-icon-152x152.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/apple-touch-icon-180x180.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/apple-touch-icon-60x60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/apple-touch-icon-76x76.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/msapplication-icon-144x144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/mstile-150x150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/icons/safari-pinned-tab.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/img_3115.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/james.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/img/mike.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/css/nucleo-icons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/demo/demo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/fonts/nucleo.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/fonts/nucleo.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/fonts/nucleo.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/fonts/nucleo.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_badge.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_breadcrumb.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_button-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_card.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_carousel.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_close.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_code.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_custom-forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_dropdown.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_functions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_images.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_input-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_jumbotron.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_media.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_modal.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_nav.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_navbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_popover.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_print.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_progress.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_reboot.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_root.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_tables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_tooltip.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_transitions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_type.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_background-variant.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_badge.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_border-radius.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_box-shadow.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_breakpoints.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_caret.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_clearfix.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_float.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_gradients.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_grid-framework.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_grid.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_hover.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_image.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_list-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_lists.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_nav-divider.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_pagination.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_reset-text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_resize.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_screen-reader.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_size.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_table-row.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_text-emphasis.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_text-hide.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_text-truncate.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_transition.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/mixins/_visibility.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_align.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_background.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_borders.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_clearfix.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_display.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_embed.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_flex.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_float.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_position.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_screenreaders.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_shadows.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_sizing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_spacing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/bootstrap/utilities/_visibility.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_alerts.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_card.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_checkboxes-radio.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_dropdown.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_fixed-plugin.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_footer.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_functions.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_images.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_input-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_misc.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_modal.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_navbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_rtl.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_sidebar-and-main-panel.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_tables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_type.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/_white-content.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/cards/_card-chart.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/cards/_card-map.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/cards/_card-plain.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/cards/_card-task.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/cards/_card-user.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_alert.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_background-variant.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_badges.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_buttons.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_dropdown.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_forms.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_icon.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_inputs.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_modals.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_page-header.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_popovers.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_vendor-prefixes.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/_wizard.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/mixins/opacity.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_backgrounds.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_floating.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_helper.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_position.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_shadows.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_sizing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_spacing.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_text.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/utilities/_transform.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/vendor/_plugin-animate-bootstrap-notify.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/custom/vendor/_plugin-perfect-scrollbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/assets/sass/black-dashboard/plugins/_plugin-perfect-scrollbar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/BaseAlert.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/BaseButton.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/BaseCheckbox.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/BaseDropdown.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/BaseNav.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/BaseRadio.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/BaseTable.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/Cards/Card.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/Cards/StatsCard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/Charts/BarChart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/Charts/LineChart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/Charts/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/Charts/utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/CloseButton.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/Inputs/BaseInput.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/Modal.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/NavbarToggleButton.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/NotificationPlugin/Notification.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/NotificationPlugin/Notifications.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/NotificationPlugin/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/SidebarPlugin/SideBar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/SidebarPlugin/SidebarLink.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/SidebarPlugin/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/components/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/directives/click-ouside.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/i18n.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/dashboard/Content.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/dashboard/ContentFooter.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/dashboard/DashboardLayout.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/dashboard/MobileMenu.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/dashboard/TopNavbar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/starter/Content.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/starter/MobileMenu.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/starter/SampleFooter.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/starter/SampleLayout.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/starter/SampleNavbar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/layout/starter/SamplePage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/locales/ar.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/locales/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Dashboard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Dashboard/TaskList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Dashboard/UserTable.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Icons.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Maps.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/NotFoundPage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Notifications.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Notifications/NotificationTemplate.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Profile.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Profile/EditProfileForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Profile/UserCard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/TableList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/pages/Typography.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/plugins/RTLPlugin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/plugins/blackDashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/plugins/globalComponents.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/plugins/globalDirectives.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/registerServiceWorker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/router/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/router/routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/src/router/starterRouter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/vue.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-black-dashboard-master/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1lY1xHRzD5b1Aqw02yvBTaEaGg6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="893a9c56-bcb3-490c-93d8-47d442a1c20c" name="Default Changelist" comment="" />
+      <created>1607759455327</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607759455327</updated>
+      <workItem from="1607759457887" duration="2019000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
