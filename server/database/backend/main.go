@@ -410,9 +410,6 @@ func CreatedInfectedInfo(w http.ResponseWriter, r *http.Request){
 }
 
 
-
-
-
 func GetCountry(w http.ResponseWriter, r *http.Request){
 	jsonized ,_ := getJSON("SELECT country,COUNT(*) as count FROM IPWhois GROUP BY country ORDER BY count DESC ")
 	respond.With(w, r, http.StatusOK,jsonized)
