@@ -1,27 +1,21 @@
 <?php
 
+### TAKE the Numbers
+//$createinfect = file_get_contents("MIDDLEWAREXXX/dashboard/status/createinfect");
+$createinfect = '{"created":280,"infected":80}';
+$createinfect = json_decode($createinfect,true);
+//$types_count = file_get_contents("MIDDLEWAREXXX/dashboard/status/typescount");
+$types_count = '{"phishing":200,"adware":50,"wulnware":30}';
+$types_count = json_decode($types_count,true);
+//$payments = file_get_contents("MIDDLEWAREXXX/dashboard/status/paid");
+$payments = '{"paid":50,"notpaid":30,"collected":3000,"target":10000}';
+$payments = json_decode($payments,true);
+//$mails = file_get_contents("MIDDLEWAREXXX/dashboard/status/mails");
+$mails = '{"sent":200,"opened":125,"download":70,"infectedbyphishingmail":30}';
+$mails = json_decode($mails,true);
 
 
-function takeStaticsData(){
 
-    //$createinfect = file_get_contents("MIDDLEWAREXXX/dashboard/status/createinfect");
-    $createinfect = '{"created":280,"infected":80}';
-    $createinfect = json_decode($createinfect,true);
-    //$types_count = file_get_contents("MIDDLEWAREXXX/dashboard/status/typescount");
-    $types_count = '{"phishing":200,"adware":50,"wulnware":30}';
-    $types_count = json_decode($types_count,true);
-    //$payments = file_get_contents("MIDDLEWAREXXX/dashboard/status/paid");
-    $payments = '{"paid":50,"notpaid":30,"collected":3000,"target":10000}';
-    $payments = json_decode($payments,true);
-    //$mails = file_get_contents("MIDDLEWAREXXX/dashboard/status/mails");
-    $mails = '{"sent":200,"opened":125,"download":70,"runORinfectedbyphishing":30}';
-    $mails = json_decode($mails,true);
-    
-    return array_merge($createinfect,$types_count,$payments,$mails);
-}
-
-$stats = takeStaticsData();
-//print_r($stats);
 
 
 
@@ -93,11 +87,11 @@ function createDonutDiv($id,$title){
                             <div class="row py-2">
                                 <?php
                                 
-                                    $titles = array("Target Amount - Collected Money","Created - Infected", "Types", "Paid - Not Paid", "Sended Mail - Opened Mail",
-                                                    "Opened Mail - Infected","Paid - Not Paid");
-                                    $i = 1;
+                                    $titles = array("Target Amount - Collected Money","Created - Infected", "Types", "Paid - Not Paid", "Sent Mail - Opened Mail",
+                                                    "Opened Mail - Infected");
+                                    $donut_count = 0;
                                     foreach($titles as $tit){
-                                        echo createDonutDiv("chDonut".$i++,$tit);
+                                        echo createDonutDiv("chDonut".++$donut_count,$tit);
                                     }
 
                                 ?>
@@ -107,7 +101,7 @@ function createDonutDiv($id,$title){
                     </div>
 
                     <script>
-                        var colors = ['#ff0000','#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+                        var colors = ['#ff0000','#007bff','#c3e6cb','#28a745','#333333','#dc3545','#6c757d'];
 
                         function donutmaker(elementid, labels, data){
                             
@@ -139,25 +133,32 @@ function createDonutDiv($id,$title){
 
                         }
 
-                        <?php
-                        
-                        $slices = "var slices = [";
-                        foreach($titles as $tit){
-                            if($tit === "Types"){$tit = "phishing - adware - wulnware";}
-                            $slices.="[";
-                            foreach(explode(" - ",$tit) as $t){
-                                $slices.="'".$t."',";
+                        <?php        
+
+                            $slice_names = array();
+                            $slice_values = array();
+                            foreach($titles as $tit){
+                                if($tit === "Types"){$tit = "phishing - adware - wulnware";}
+                                array_push($slice_names, explode(" - ",$tit));
                             }
-                            $slices.="],";
-                        }
-                        $slices.="];";
-                        // $slices = 'var slices = [placeholder yap]';
-                        echo $slices;
+                            $slice_values = array(
+                                array($payments["target"],$payments["collected"]),
+                                array($createinfect["created"],$createinfect["infected"]),
+                                array($types_count["phishing"],$types_count["adware"],$types_count["wulnware"]),
+                                array($payments["paid"],$payments["notpaid"]),
+                                array($mails["sent"],$mails["opened"]),
+                                array($mails["download"],$mails["infectedbyphishingmail"]),
+                            );
+                        
+                            $slice_names = json_encode($slice_names);
+                            $slice_values = json_encode($slice_values);
+                            echo "var slice_names = $slice_names;";
+                            echo "var slice_values = $slice_values;";
+                            echo "var donut_count= $donut_count;";
                         ?>
                         
-                        var donut_count=6;
                         for (var i = 1; i<=donut_count; i++){   
-                            donutmaker("chDonut"+i,slices[0],[20,100]);
+                            donutmaker("chDonut"+i,slice_names[i-1],slice_values[i-1]);
                         }
                         
 
@@ -166,9 +167,8 @@ function createDonutDiv($id,$title){
             </div>
         </div>
 
-
-
         <script src="/js/jquery-3.5.1.slim.min.js"></script>
         <script src="/js/bootstrap.bundle.min.js"></script>
+
     </body>
 </html>

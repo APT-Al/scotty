@@ -95,6 +95,7 @@ function createVictimTable(){
         <script src="/js/animated.js"></script>
         <script src="/js/worldLow.js"></script>
         <script src="/js/worldmap.js"></script>
+        <?php // TODO: World values?>
 
         
 
