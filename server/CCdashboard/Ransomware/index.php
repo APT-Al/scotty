@@ -55,7 +55,7 @@ function createVictimTable(){
     <script src="/js/worldLow.js"></script>
     <script src="/js/worldmap.js"></script>
     <script>
-        var url = "http://138.68.86.190:8080/dashboard/status/worldmap";
+        var url = "http://138.68.86.190:8080/dashboard/status/worldmap-ransomware";
         //var url = "/ok.json";
         var worldmapvalues=[];
         var xhr = new XMLHttpRequest();
