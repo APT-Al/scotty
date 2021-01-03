@@ -28,10 +28,12 @@ function createVictimTable(){
     
     foreach($victims as $vic){
         $table.='<tr>';
-        foreach($vic as $ky => $vl){
-            #echo $ky."=>".$vl."<br>";
-            $table.='<td>'.$vl.'</td>';
-        }
+        $table.='<td>'.$vic->id.'</td>';
+        $table.='<td>'.$vic->ip.'</td>';
+        $table.='<td>'.$vic->username.'</td>';
+        $table.='<td>'.$vic->infection_date.'</td>';
+        $table.='<td>'.$vic->first_touch.'</td>';
+        $table.='<td>'.$vic->country.'</td>';
         $table.='</tr>';
     }
 
