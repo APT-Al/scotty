@@ -1,0 +1,1 @@
+<ogulcan ellerinden öper>
