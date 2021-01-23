@@ -10,10 +10,10 @@ services:
     volumes:
       - ./mysql/db-with-dummy-data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:
-      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'pass'
       MYSQL_DATABASE: tester
       MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'pass'
+      MYSQL_PASSWORD: 'user_pass'
     ports:
       - "3306:3306"
     networks:
