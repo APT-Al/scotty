@@ -30,7 +30,7 @@ function createAgentTable(){
         $table.='<tr>';
         foreach($vic as $ky => $vl){
             #echo $ky."=>".$vl."<br>";
-            $table.='<td>'.$vl.'</td>';
+            $table.='<td>'.htmlspecialchars($vl).'</td>';
         }
         $table.='</tr>';
     }
